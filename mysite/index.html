@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тёмный Профиль</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <img src="https://r2.guns.lol/e6754fd4-726b-4494-b122-4a1ba5df1678.webp" alt="Аватар" class="avatar">
+        <h1 class="username">modera</h1>
+        <p class="status">guns.lol on top!</p>
+        <div class="social-icons">
+            <a href="https://twitter.com" target="_blank" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+            </a>
+            <a href="https://discord.com" target="_blank" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">
+            </a>
+            <a href="https://email.com" target="_blank" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email">
+            </a>
+            <a href="https://world.com" target="_blank" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="World">
+            </a>
+        </div>
+        <div class="audio-player">
+            <button id="playPauseBtn">▶️</button>
+            <input type="range" id="seekBar" value="0" min="0" max="100">
+            <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+        </div>
+    </div>
+    <audio id="audio"></audio>
+    <script src="script.js"></script>
+</body>
+</html>

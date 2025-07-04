@@ -1,0 +1,8 @@
+Flask
+gunicorn
+flask_sqlalchemy
+flask_mail
+flask-wtf
+sqlalchemy
+werkzeug
+wtforms

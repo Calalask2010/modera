@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block title %}Контакты - hf1sh{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section">
+        <h1 class="section-title">
+            <i class="fas fa-envelope"></i> Контакты
+        </h1>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <i class="fas fa-paper-plane"></i> Отправить сообщение
+                        </h3>
+                        
+                        <form method="POST" action="{{ url_for('contact') }}">
+                            {{ form.hidden_tag() }}
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.name.label(class="form-label") }}
+                                    {{ form.name(class="form-control") }}
+                                    {% if form.name.errors %}
+                                        <div class="text-danger small">
+                                            {% for error in form.name.errors %}
+                                                <div>{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    {{ form.email.label(class="form-label") }}
+                                    {{ form.email(class="form-control") }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small">
+                                            {% for error in form.email.errors %}
+                                                <div>{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form.subject.label(class="form-label") }}
+                                {{ form.subject(class="form-control") }}
+                                {% if form.subject.errors %}
+                                    <div class="text-danger small">
+                                        {% for error in form.subject.errors %}
+                                            <div>{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form.message.label(class="form-label") }}
+                                {{ form.message(class="form-control", rows="5") }}
+                                {% if form.message.errors %}
+                                    <div class="text-danger small">
+                                        {% for error in form.message.errors %}
+                                            <div>{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="d-grid">
+                                {{ form.submit(class="btn btn-primary btn-lg") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <!-- Contact Info -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-info-circle"></i> Контактная информация
+                        </h5>
+                        <div class="contact-info">
+                            <div class="contact-item mb-3">
+                                <i class="fas fa-envelope"></i>
+                                <span>contact@hf1sh.com</span>
+                            </div>
+                            <div class="contact-item mb-3">
+                                <i class="fas fa-phone"></i>
+                                <span>+7 (XXX) XXX-XX-XX</span>
+                            </div>
+                            <div class="contact-item mb-3">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Россия, Москва</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Пн-Пт: 10:00 - 18:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-share-alt"></i> Социальные сети
+                        </h5>
+                        <div class="social-links">
+                            <a href="https://twitter.com" target="_blank" class="social-link">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </a>
+                            <a href="https://github.com" target="_blank" class="social-link">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="https://discord.com" target="_blank" class="social-link">
+                                <i class="fab fa-discord"></i> Discord
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="section">
+        <h2 class="section-title">
+            <i class="fas fa-question-circle"></i> Часто задаваемые вопросы
+        </h2>
+        
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item" style="background: var(--secondary-bg); border: 1px solid var(--neon-color);">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" style="background: var(--secondary-bg); color: var(--text-color); border: none;">
+                        Как быстро вы отвечаете на сообщения?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body" style="color: var(--text-color);">
+                        Обычно я отвечаю на сообщения в течение 24 часов. Если ваш вопрос срочный, 
+                        пожалуйста, укажите это в теме сообщения.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item" style="background: var(--secondary-bg); border: 1px solid var(--neon-color);">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="background: var(--secondary-bg); color: var(--text-color); border: none;">
+                        Какие проекты вы принимаете к работе?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body" style="color: var(--text-color);">
+                        Я работаю с веб-приложениями, мобильными приложениями и различными 
+                        цифровыми решениями. Особенно интересуют инновационные проекты.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item" style="background: var(--secondary-bg); border: 1px solid var(--neon-color);">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" style="background: var(--secondary-bg); color: var(--text-color); border: none;">
+                        Предоставляете ли вы техническую поддержку?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body" style="color: var(--text-color);">
+                        Да, я предоставляю техническую поддержку для всех разработанных проектов. 
+                        Условия поддержки обсуждаются индивидуально.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.contact-info .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info .contact-item i {
+    width: 20px;
+    color: var(--neon-color);
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(0, 255, 204, 0.1);
+    color: var(--neon-color);
+    transform: translateX(5px);
+}
+
+.social-link i {
+    width: 20px;
+    color: var(--neon-color);
+}
+</style>
+{% endblock %}

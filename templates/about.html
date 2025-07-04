@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Обо мне - modera{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section">
+        <h1 class="section-title">
+            <i class="fas fa-user"></i> Обо мне
+        </h1>
+        
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center mb-4">
+                <img src="https://r2.guns.lol/e6754fd4-726b-4494-b122-4a1ba5df1678.webp" alt="modera" class="avatar" style="width: 200px; height: 200px;">
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Привет! Я modera</h2>
+                        <p class="card-text">
+                            Добро пожаловать на мой ахуевший сайт! Я — долбоёб и творческая личность, 
+                            которая ебёт всё, что движется.
+                        </p>
+                        <p class="card-text">
+                            Наш девиз — четыре слова: чтоб сгорела наша школа.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    
+    <!-- Interests Section -->
+    <section class="section">
+        <h2 class="section-title">
+            <i class="fas fa-heart"></i> Интересы и хобби
+        </h2>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-music fa-3x mb-3" style="color: var(--neon-color);"></i>
+                        <h5 class="card-title">Музыка</h5>
+                        <p class="card-text">
+                            Меломан, и мне похуй
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-gamepad fa-3x mb-3" style="color: var(--neon-color);"></i>
+                        <h5 class="card-title">Игры</h5>
+                        <p class="card-text">
+                            Играю в Dota 2, Osu!, Minecraft и Mobile Legends.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

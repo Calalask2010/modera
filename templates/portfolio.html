@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Портфолио - hf1sh{% endblock %}
+
+{% block extra_css %}
+<style>
+.portfolio-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.portfolio-filter {
+    background: var(--secondary-bg);
+    color: var(--text-color);
+    border: 2px solid var(--neon-color);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.portfolio-filter:hover,
+.portfolio-filter.active {
+    background: var(--neon-color);
+    color: #000;
+    transform: translateY(-2px);
+}
+
+.portfolio-search {
+    max-width: 400px;
+    margin: 0 auto 40px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="section">
+        <h1 class="section-title">
+            <i class="fas fa-briefcase"></i> Портфолио
+        </h1>
+        
+        <!-- Search -->
+        <div class="portfolio-search">
+            <div class="input-group">
+                <input type="text" class="form-control" id="portfolioSearch" placeholder="Поиск проектов...">
+                <button class="btn btn-outline-primary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="portfolio-filters">
+            <button class="portfolio-filter active" data-filter="all">Все</button>
+            <button class="portfolio-filter" data-filter="web">Веб-разработка</button>
+            <button class="portfolio-filter" data-filter="mobile">Мобильные приложения</button>
+            <button class="portfolio-filter" data-filter="design">Дизайн</button>
+            <button class="portfolio-filter" data-filter="other">Другое</button>
+        </div>
+        
+        <!-- Portfolio Grid -->
+        <div class="portfolio-grid">
+            {% for item in portfolio %}
+            <div class="portfolio-item" data-category="web">
+                <div class="portfolio-image" style="background-image: url('{{ item.image_url or 'https://via.placeholder.com/400x300' }}');">
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-links">
+                            {% if item.project_url %}
+                            <a href="{{ item.project_url }}" target="_blank" class="portfolio-link">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                            {% endif %}
+                            <a href="#" class="portfolio-link" data-bs-toggle="modal" data-bs-target="#portfolioModal{{ item.id }}">
+                                <i class="fas fa-info-circle"></i> Подробнее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-content">
+                    <h3 class="portfolio-title">{{ item.title }}</h3>
+                    <p class="portfolio-description">{{ item.description }}</p>
+                    {% if item.technologies %}
+                    <div class="portfolio-tech">
+                        {% for tech in item.technologies.split(',') %}
+                        <span class="tech-tag">{{ tech.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Modal для каждого проекта -->
+            <div class="modal fade" id="portfolioModal{{ item.id }}" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="background: var(--secondary-bg); border: 1px solid var(--neon-color);">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="color: var(--neon-color);">{{ item.title }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" style="filter: invert(1);"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% if item.image_url %}
+                            <img src="{{ item.image_url }}" class="img-fluid mb-3" alt="{{ item.title }}">
+                            {% endif %}
+                            <p style="color: var(--text-color);">{{ item.description }}</p>
+                            {% if item.technologies %}
+                            <div class="portfolio-tech mb-3">
+                                {% for tech in item.technologies.split(',') %}
+                                <span class="tech-tag">{{ tech.strip() }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <p style="color: var(--text-muted);">
+                                <i class="fas fa-calendar"></i> {{ item.date_created.strftime('%d.%m.%Y') }}
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            {% if item.project_url %}
+                            <a href="{{ item.project_url }}" target="_blank" class="btn btn-primary">
+                                <i class="fas fa-external-link-alt"></i> Открыть проект
+                            </a>
+                            {% endif %}
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if not portfolio %}
+        <div class="text-center py-5">
+            <i class="fas fa-folder-open fa-4x mb-4" style="color: var(--text-muted);"></i>
+            <h3 style="color: var(--text-muted);">Портфолио пока пусто</h3>
+            <p style="color: var(--text-muted);">Скоро здесь появятся интересные проекты!</p>
+        </div>
+        {% endif %}
+    </section>
+    
+    <!-- Contact CTA -->
+    <section class="section text-center">
+        <h2 class="section-title">Понравились мои работы?</h2>
+        <p class="lead mb-4" style="color: var(--text-muted);">
+            Давайте обсудим ваш проект и создадим что-то потрясающее вместе
+        </p>
+        <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">
+            <i class="fas fa-envelope"></i> Начать проект
+        </a>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/portfolio.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация поиска
+    if (window.portfolioFunctions) {
+        window.portfolioFunctions.initPortfolioSearch();
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,220 @@
+:root {
+    /* Настраиваемые переменные */
+    --background-type: 'image'; /* Варианты: 'image', 'gradient', 'video' */
+    --background-image: url('https://images.unsplash.com/photo-1528722828814-77b9b83a1882'); /* Замените на свою картинку */
+    --background-gradient: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+    --background-video: 'https://example.com/background.mp4'; /* Замените на видео */
+    --music-url: 'https://example.com/audio.mp3'; /* Замените на MP3 */
+    --neon-color: #00ffcc; /* Цвет неонового свечения */
+    --primary-bg: rgba(0, 0, 0, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    background: #000;
+    overflow-x: hidden;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Фон */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+}
+
+.background.image {
+    background: var(--background-image) no-repeat center center/cover;
+}
+
+.background.gradient {
+    background: var(--background-gradient);
+}
+
+.background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Основной контейнер */
+.container {
+    text-align: center;
+    padding: 20px;
+    background: var(--primary-bg);
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--neon-color);
+    box-shadow: 0 0 25px var(--neon-color);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px var(--neon-color);
+}
+
+.username {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 15px var(--neon-color);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.status {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 30px;
+    text-shadow: 0 0 5px #ccc;
+}
+
+/* Иконки соцсетей */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.social-icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px var(--neon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px var(--neon-color);
+}
+
+.social-icon img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+.social-icon:hover img {
+    filter: brightness(1) invert(0);
+}
+
+/* Аудиоплеер */
+.audio-player {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px var(--neon-color);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 20px var(--neon-color); }
+    50% { box-shadow: 0 0 30px var(--neon-color); }
+    100% { box-shadow: 0 0 20px var(--neon-color); }
+}
+
+.audio-player button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.audio-player button:hover {
+    color: var(--neon-color);
+    transform: scale(1.2);
+}
+
+.audio-player input[type="range"] {
+    width: 150px;
+    accent-color: var(--neon-color);
+    transition: width 0.3s ease;
+}
+
+.audio-player span {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .username {
+        font-size: 1.8rem;
+    }
+
+    .status {
+        font-size: 1rem;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .social-icon img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .audio-player input[type="range"] {
+        width: 100px;
+    }
+
+    .audio-player {
+        padding: 10px;
+    }
+}
